@@ -1,0 +1,41 @@
+{
+  "name": "@venuedb/reality",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/venuedb/viewer"
+  },
+  "version": "2.3.3",
+  "description": "",
+  "main": "Reality.js",
+  "scripts": {
+    "start": "gulp potree && gulp watch",
+    "build": "gulp build",
+    "potree": "git+https://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:x-oauth-basic@github.com/venuedb/potree.git#main-realitycloud"
+  },
+  "files": [
+    "build_release"
+  ],
+  "dependencies": {
+    "browser-sync": "^2.26.14",
+    "del": "^6.0.0",
+    "dotenv": "^8.2.0",
+    "fs-extra": "^9.1.0",
+    "gulp": "^4.0.2",
+    "gulp-clean": "^0.4.0",
+    "gulp-connect": "^5.7.0",
+    "rollup": "^1.31.1",
+    "rollup-plugin-javascript-obfuscator": "^1.0.4",
+    "@rollup/plugin-json": "^4.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-terser": "^7.0.2",
+    "three": "0.124.0"
+  },
+  "author": {
+    "name": "ZhefengJin",
+    "url": "https://cesiumgis.com"
+  },
+  "license": "ISC",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/venuedb"
+  }
+}

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Reality Viewer</title>
+
+    <link rel="stylesheet" type="text/css" href="../potree/build/potree/potree.css">
+    <link rel="stylesheet" type="text/css" href="../potree/libs/jquery-ui/jquery-ui.min.css">
+    <link rel="stylesheet" type="text/css" href="../potree/libs/openlayers3/ol.css">
+    <link rel="stylesheet" type="text/css" href="../potree/libs/spectrum/spectrum.css">
+    <link rel="stylesheet" type="text/css" href="../potree/libs/jstree/themes/mixed/style.css">
+
+    <link rel="stylesheet" type="text/css" href="../build/Reality.css">
+</head>
+
+<body>
+<script src="../potree/libs/jquery/jquery-3.1.1.min.js"></script>
+<script src="../potree/libs/spectrum/spectrum.js"></script>
+<script src="../potree/libs/jquery-ui/jquery-ui.min.js"></script>
+<script src="../potree/libs/other/BinaryHeap.js"></script>
+<script src="../potree/libs/tween/tween.min.js"></script>
+<script src="../potree/libs/d3/d3.js"></script>
+<script src="../potree/libs/proj4/proj4.js"></script>
+<script src="../potree/libs/openlayers3/ol.js"></script>
+<script src="../potree/libs/i18next/i18next.js"></script>
+<script src="../potree/libs/jstree/jstree.js"></script>
+<script src="../potree/build/potree/potree.js"></script>
+<script src="../potree/libs/plasio/js/laslaz.js"></script>
+<script src="https://cesiumjs.org/releases/1.77/Build/Cesium/Cesium.js"></script>
+
+<script src="../build/reality.js"></script>
+
+<!-- INCLUDE ADDITIONAL DEPENDENCIES HERE -->
+<!-- INCLUDE SETTINGS HERE -->
+
+<div class="potree_container" style="position: absolute; width: 100%; height: 100%; left: 0; top: 0; ">
+    <div id="potree_render_area"></div>
+    <div id="potree_sidebar_container"></div>
+</div>
+
+<input type="button" id="export" value="export"
+       style="position: absolute; right: 10px; bottom: 10px; z-index: 10000; font-size: 2em;">
+
+<script type="module">
+    import * as THREE from "../potree/libs/three.js/build/three.module.js";
+
+    Reality.preOverridePotree();
+
+    window.viewer = new Potree.Viewer(document.getElementById("potree_render_area"));
+
+    Reality.initialize(viewer);
+
+    viewer.setEDLEnabled(true);
+    viewer.setFOV(60);
+    viewer.setPointBudget(1000 * 1000);
+    viewer.loadSettingsFromURL();
+
+    viewer.setDescription("Reality 2D Dfx Export Demo");
+
+    viewer.loadGUI(() => {
+        viewer.setLanguage('en');
+        $("#menu_tools").next().show();
+        $("#menu_scene").next().show();
+
+        viewer.toggleSidebar();
+    });
+
+    Potree.loadPointCloud("../potree/pointclouds/vol_total/cloud.js", "sigeom.sa", function (e) {
+        let scene = viewer.scene;
+
+        scene.addPointCloud(e.pointcloud);
+
+        let material = e.pointcloud.material;
+
+        material.size = 1;
+        material.pointSizeType = Potree.PointSizeType.ADAPTIVE;
+
+        scene.view.position.set(589974.341, 231698.397, 986.146);
+        scene.view.lookAt(new THREE.Vector3(589851.587, 231428.213, 715.634));
+    });
+
+    let scene = viewer.scene;
+
+    let measure = new Potree.Measure();
+
+    measure.closed = false;
+
+    measure.addMarker(new THREE.Vector3(589988.51, 231367.63, 750.03));
+    measure.addMarker(new THREE.Vector3(589969.84, 231476.77, 730.53));
+    measure.addMarker(new THREE.Vector3(589872.97, 231504.33, 737.86));
+    measure.addMarker(new THREE.Vector3(589870.09, 231387.76, 735.24));
+
+    scene.addMeasurement(measure);
+
+    measure = new Potree.Measure();
+
+    measure.showArea = true;
+    measure.closed = true;
+
+    measure.addMarker(new THREE.Vector3(589709.03, 231348.28, 761.75));
+    measure.addMarker(new THREE.Vector3(589757.83, 231379.44, 751.71));
+    measure.addMarker(new THREE.Vector3(589737.05, 231432.33, 737.86));
+    measure.addMarker(new THREE.Vector3(589668.34, 231464.65, 759.12));
+    measure.addMarker(new THREE.Vector3(589640.05, 231413.79, 765.69));
+
+    scene.addMeasurement(measure);
+
+    measure = newPointMeasurement();
+    measure.addMarker(new THREE.Vector3(590072.07, 231340.51, 758.48));
+    scene.addMeasurement(measure);
+
+    measure = newPointMeasurement();
+    measure.addMarker(new THREE.Vector3(590086.48, 231418.14, 744.56));
+    scene.addMeasurement(measure);
+
+    measure = newPointMeasurement();
+    measure.addMarker(new THREE.Vector3(590084.74, 231478.90, 737.65));
+    scene.addMeasurement(measure);
+
+    //circle
+    measure = new Potree.Measure();
+
+    measure.showDistances = false;
+    measure.showHeight = false;
+    measure.showA = false;
+    measure.showCircle = true;
+    measure.showEdges = false;
+    measure.closed = false;
+    measure.maxMarkers = 3;
+
+    measure.addMarker(new THREE.Vector3(589826.62, 231383.84, 744.03));
+    measure.addMarker(new THREE.Vector3(589861.25, 231457.23, 747.43));
+    measure.addMarker(new THREE.Vector3(589809.02, 231507.51, 743.38));
+
+    scene.addMeasurement(measure);
+
+    // angle
+    measure = new Potree.Measure();
+
+    measure.showDistances = false;
+    measure.showAngles = true;
+    measure.showHeight = false;
+    measure.showCircle = false;
+    measure.showArea = false;
+    measure.showEdges = true;
+    measure.closed = true;
+    measure.maxMarkers = 3;
+
+    measure.addMarker(new THREE.Vector3(590016.56, 231502.40, 734.78));
+    measure.addMarker(new THREE.Vector3(590061.43, 231534.47, 728.89));
+    measure.addMarker(new THREE.Vector3(589971.63, 231546.85, 723.18));
+
+    scene.addMeasurement(measure);
+
+    // azimuth
+    measure = new Potree.Measure();
+
+    measure.showDistances = false;
+    measure.showAngles = false;
+    measure.showHeight = false;
+    measure.showCircle = false;
+    measure.showArea = false;
+    measure.showEdges = true;
+    measure.closed = false;
+    measure.showAzimuth = true;
+    measure.maxMarkers = 2;
+
+    measure.addMarker(new THREE.Vector3(589965.19, 231322.65, 753.99));
+    measure.addMarker(new THREE.Vector3(589891.54, 231341.00, 742.35));
+
+    scene.addMeasurement(measure);
+
+    addAnnotations(viewer);
+
+    let volume = new Potree.BoxVolume();
+
+   // volume.transformationEnabled = false;
+
+    volume.position.set(589934.97, 231429.41, 760.70);
+    volume.scale.set(580.08, 290.07, 140.41);
+
+    volume.clip = true;
+
+    scene.addVolume(volume);
+
+    $("#export").click(() => {
+        Reality.debugShowProjectPlaneForBoxVolume(scene, volume);
+
+        Reality.setDfxExportOptions({
+            projectBox: volume,
+        });
+
+        /*
+        Reality.setDfxExportOptions({
+            projectBox: volume,
+            rotationAngle: 180,
+            useAutomaticTextHeight: false,
+            textHeight: 8,
+            annotationColor: 0x0000ff,
+            color: 0x00ff00
+        });
+        */
+
+        Reality.export2DDxf(viewer, "sample.dxf", true);
+    });
+
+    function newPointMeasurement() {
+        let measure = new Potree.Measure();
+
+        measure.showDistances = false;
+        measure.showAngles = false;
+        measure.showCoordinates = true;
+        measure.showArea = false;
+        measure.closed = true;
+        measure.maxMarkers = 1;
+        measure.name = 'Point';
+
+        return measure;
+    }
+
+    function addAnnotations(viewer) {
+        let a = new Potree.Annotation({
+            position: [589935.62, 231434.52, 730.24],
+            title: "Distance measurement",
+         });
+
+        viewer.scene.annotations.add(a);
+
+        a = new Potree.Annotation({
+            position: [589711.79, 231425.06, 758.89],
+            title: "Area measurement",
+        });
+
+        viewer.scene.annotations.add(a);
+
+        a = new Potree.Annotation({
+            position: [590057.36, 231379.16, 752.22],
+            title: "Points measurement",
+        });
+
+        viewer.scene.annotations.add(a);
+
+        a = new Potree.Annotation({
+            position: [590023.25, 231524.72, 728.66],
+            title: "Angle measurement",
+        });
+
+        viewer.scene.annotations.add(a);
+
+        a = new Potree.Annotation({
+            position: [589813.77, 231469.86, 747.20],
+            title: "Circle measurement",
+        });
+
+        viewer.scene.annotations.add(a);
+    }
+
+</script>
+
+</body>
+</html>

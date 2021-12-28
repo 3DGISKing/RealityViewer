@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Reality Viewer</title>
+
+    <link rel="stylesheet" type="text/css" href="../potree/build/potree/potree.css">
+    <link rel="stylesheet" type="text/css" href="../potree/libs/jquery-ui/jquery-ui.min.css">
+    <link rel="stylesheet" type="text/css" href="../potree/libs/openlayers3/ol.css">
+    <link rel="stylesheet" type="text/css" href="../potree/libs/spectrum/spectrum.css">
+    <link rel="stylesheet" type="text/css" href="../potree/libs/jstree/themes/mixed/style.css">
+
+    <link rel="stylesheet" type="text/css" href="../build/Reality.css">
+</head>
+
+<body>
+<script src="../potree/libs/jquery/jquery-3.1.1.min.js"></script>
+<script src="../potree/libs/spectrum/spectrum.js"></script>
+<script src="../potree/libs/jquery-ui/jquery-ui.min.js"></script>
+<script src="../potree/libs/other/BinaryHeap.js"></script>
+<script src="../potree/libs/tween/tween.min.js"></script>
+<script src="../potree/libs/d3/d3.js"></script>
+<script src="../potree/libs/proj4/proj4.js"></script>
+<script src="../potree/libs/openlayers3/ol.js"></script>
+<script src="../potree/libs/i18next/i18next.js"></script>
+<script src="../potree/libs/jstree/jstree.js"></script>
+<script src="../potree/build/potree/potree.js"></script>
+<script src="../potree/libs/plasio/js/laslaz.js"></script>
+
+<script src="https://cesiumjs.org/releases/1.77/Build/Cesium/Cesium.js"></script>
+
+<script src="../build/reality.js"></script>
+
+<!-- INCLUDE ADDITIONAL DEPENDENCIES HERE -->
+<!-- INCLUDE SETTINGS HERE -->
+
+<div class="potree_container" style="position: absolute; width: 100%; height: 100%; left: 0; top: 0; ">
+    <div id="potree_render_area"></div>
+    <div id="potree_sidebar_container"></div>
+</div>
+
+<input type="button" id="export" value="export"
+       style="position: absolute; right: 10px; bottom: 10px; z-index: 10000; font-size: 2em;">
+
+<script type="module">
+    import * as THREE from "../potree/libs/three.js/build/three.module.js";
+
+    Reality.preOverridePotree();
+
+    window.viewer = new Potree.Viewer(document.getElementById("potree_render_area"));
+
+    Reality.initialize(viewer);
+
+    viewer.setEDLEnabled(true);
+    viewer.setFOV(60);
+    viewer.setPointBudget(1000 * 1000);
+    viewer.loadSettingsFromURL();
+
+    viewer.setDescription("Reality Export Demo");
+
+    viewer.loadGUI(() => {
+        viewer.setLanguage('en');
+        $("#menu_tools").next().show();
+        $("#menu_scene").next().show();
+
+        viewer.toggleSidebar();
+    });
+
+    $("#export").click(() => {
+        Reality.exportAll("sample.json");
+    });
+
+    loadPointsCloud(viewer);
+
+    let scene = viewer.scene;
+
+    addAnnotations(viewer);
+    addMeasurements(scene);
+
+    // for testing clip task export/import
+    //viewer.setClipTask(Potree.ClipTask.SHOW_INSIDE);
+    addClipBoxes(viewer);
+
+    addImages(scene);
+    addVideos(viewer);
+    createCameraAnimation(viewer);
+    addProfile(scene);
+
+    scene.view.position.set(589974.341, 231698.397, 986.146);
+    scene.view.lookAt(new THREE.Vector3(589851.587, 231428.213, 715.634));
+
+    async function loadPointsCloud(viewer) {
+        let pointclouds = [
+            {
+                url: "../potree/pointclouds/vol_total/cloud.js",
+                callback: (pointcloud) => {
+                    pointcloud.name = "sorvilier";
+
+                    let material = pointcloud.material;
+                    material.size = 1;
+                    material.pointSizeType = Potree.PointSizeType.ADAPTIVE;
+                },
+            }, {
+                url: "../potree/pointclouds/lion_takanawa/cloud.js",
+                callback: (pointcloud) => {
+                    pointcloud.name = "lion 1";
+
+                    let material = pointcloud.material;
+                    material.pointSizeType = Potree.PointSizeType.ADAPTIVE;
+
+                    pointcloud.position.set(589927.44, 231479.04, 726.87);
+                    pointcloud.scale.set(10, 10, 10);
+                    pointcloud.rotation.set(0, 0, 0.8 * Math.PI);
+                },
+            }, {
+                url: "../potree/pointclouds/lion_takanawa/cloud.js",
+                callback: (pointcloud) => {
+                    pointcloud.name = "lion 2";
+
+                    let material = pointcloud.material;
+
+                    material.size = 1;
+                    material.pointSizeType = Potree.PointSizeType.ADAPTIVE;
+                    material.activeAttributeName = "elevation";
+                    material.heightMin = 720;
+                    material.heightMax = 780;
+
+                    pointcloud.position.set(589997.44, 231479.04, 726.87);
+                    pointcloud.scale.set(10, 10, 10);
+                    pointcloud.rotation.set(0, 0, 0.8 * Math.PI);
+                },
+            }, {
+                url: "../potree/pointclouds/lion_takanawa/cloud.js",
+                callback: (pointcloud) => {
+                    pointcloud.name = "lion 3";
+
+                    let material = pointcloud.material;
+                    material.pointSizeType = Potree.PointSizeType.ADAPTIVE;
+
+                    material.color = new THREE.Color().setRGB(0.4, 0.6, 0.7);
+
+                    pointcloud.position.set(589927.44 - 70, 231479.04, 726.87);
+                    pointcloud.scale.set(10, 10, 10);
+                    pointcloud.rotation.set(0, 0, 0.8 * Math.PI);
+                },
+            }, {
+                url: "http://5.9.65.151/mschuetz/potree/resources/pointclouds/archpro/heidentor/cloud.js",
+                callback: (pointcloud) => {
+                    pointcloud.name = "Heidentor";
+
+                    pointcloud.position.set(589817.920, 231358.010, 744.865);
+                    pointcloud.scale.set(6, 6, 6);
+                    pointcloud.rotation.z = -1.9;
+                },
+            }
+        ];
+
+        // start loading all point clouds asynchronously, get a promise for each one that resolves when it's loaded
+        let promises = pointclouds.map(p => Potree.loadPointCloud(p.url));
+
+        // now iterate over all promises in order
+        for (let i = 0; i < promises.length; i++) {
+
+            // wait until this point cloud is loaded before processing the next one
+            let pointcloud = (await promises[i]).pointcloud;
+
+            pointclouds[i].callback(pointcloud);
+            viewer.scene.addPointCloud(pointcloud);
+        }
+    }
+
+    function addMeasurements(scene) {
+        { // SINGLE POINT MEASURE
+            let measure = new Potree.Measure();
+            measure.name = "Point";
+            measure.showDistances = false;
+            measure.showCoordinates = true;
+            measure.maxMarkers = 1;
+            measure.addMarker(new THREE.Vector3(589853.73, 231300.24, 775.48));
+
+            scene.addMeasurement(measure);
+        }
+
+        { // DISTANCE MEASURE
+            let measure = new Potree.Measure();
+
+            measure.name = "Line";
+            measure.closed = false;
+            measure.addMarker(new THREE.Vector3(589803.18, 231357.35, 745.38));
+            measure.addMarker(new THREE.Vector3(589795.74, 231323.42, 746.21));
+            measure.addMarker(new THREE.Vector3(589822.50, 231315.90, 744.45));
+
+            scene.addMeasurement(measure);
+        }
+
+        { // ANGLE MEASURE
+            let measure = new Potree.Measure();
+            measure.name = "Angle";
+            measure.closed = true;
+            measure.showAngles = true;
+            measure.showDistances = false;
+            measure.addMarker(new THREE.Vector3(589866.11, 231372.25, 737.41));
+            measure.addMarker(new THREE.Vector3(589842.15, 231366.82, 743.61));
+            measure.addMarker(new THREE.Vector3(589860.61, 231348.01, 740.33));
+
+            scene.addMeasurement(measure);
+        }
+
+        { // HEIGHT MEASURE
+            let measure = new Potree.Measure();
+            measure.name = "Tree Height";
+            measure.closed = false;
+            measure.showDistances = false;
+            measure.showHeight = true;
+            measure.addMarker(new THREE.Vector3(589849.69, 231327.26, 766.32));
+            measure.addMarker(new THREE.Vector3(589840.96, 231329.53, 744.52));
+
+            scene.addMeasurement(measure);
+        }
+
+        { // AREA MEASURE
+            let measure = new Potree.Measure();
+            measure.name = "Area";
+            measure.closed = true;
+            measure.showArea = true;
+            measure.addMarker(new THREE.Vector3(589899.37, 231300.16, 750.25));
+            measure.addMarker(new THREE.Vector3(589874.60, 231326.06, 743.40));
+            measure.addMarker(new THREE.Vector3(589911.61, 231352.57, 743.58));
+            measure.addMarker(new THREE.Vector3(589943.50, 231300.08, 754.62));
+
+            scene.addMeasurement(measure);
+        }
+    }
+
+    function addImages(scene) {
+        const earthTexture = new THREE.TextureLoader().load(`${Reality.resourcePath}/images/earth.jpg`);
+
+        let earthImage1 = new Reality.Image(earthTexture);
+
+        earthImage1.transformationEnabled = false;
+
+        earthImage1.scale.set(87.70990081104037, 65.01472874807978, 95.53770288101325);
+        earthImage1.position.set(590080, 231546, 792.7726157084892);
+
+        scene.addImage(earthImage1);
+
+        let earthImage2 = new Reality.Image(earthTexture);
+
+        earthImage2.transformationEnabled = true;
+
+        earthImage2.scale.set(87.70990081104037, 65.01472874807978, 95.53770288101325);
+        earthImage2.position.set(589696.48, 231457.89, 795);
+
+        scene.addImage(earthImage2);
+    }
+
+    function addVideos(viewer) {
+        let videoMp4 = new Reality.Video({
+            videoUrl: `${Reality.resourcePath}/videos/big-buck-bunny_trailer.mp4`,
+            rolloffMode: 'easeInExpo',
+            minDistance: 0,
+            maxDistance: 500
+        });
+
+        videoMp4.transformationEnabled = false;
+
+        videoMp4.scale.set(87.70990081104037, 65.01472874807978, 95.53770288101325);
+        videoMp4.position.set(589688.5173246722, 231341.79786558595, 792.7726157084892);
+        videoMp4.rotation.set(0, 0, 0.0);
+        viewer.scene.addImage(videoMp4);
+
+        viewer.scene.annotations.add(new Potree.Annotation({
+            position: [589688.5173246722, 231341.79786558595, 792.7726157084892 + 60],
+            title: "mp4",
+        }));
+
+        let videoMov = new Reality.Video({
+            videoUrl: `${Reality.resourcePath}/videos/big-buck-bunny_trailer.mov`,
+            rolloffMode: 'linear',
+            minDistance: 0,
+            maxDistance: 500
+        });
+
+        videoMov.transformationEnabled = false;
+
+        videoMov.scale.set(87.70990081104037, 65.01472874807978, 95.53770288101325);
+        videoMov.position.set(590041, 231358, 792.7726157084892);
+        videoMov.rotation.set(0, 0, 0.0);
+        viewer.scene.addImage(videoMov);
+
+        viewer.scene.annotations.add(new Potree.Annotation({
+            position: [590041, 231358, 792.7726157084892 + 60],
+            title: "mov",
+        }));
+
+        let webCamVideo = new Reality.Video({
+            webCamera: true,
+            rolloffMode: 'easeInExpo',
+            minDistance: 1,
+            maxDistance: 1000
+        });
+
+        webCamVideo.transformationEnabled = false;
+
+        webCamVideo.scale.set(87.70990081104037, 65.01472874807978, 95.53770288101325);
+        webCamVideo.position.set(589753, 231437, 792.7726157084892);
+        webCamVideo.rotation.set(0, 0, 0.0);
+        viewer.scene.addImage(webCamVideo);
+
+        viewer.scene.annotations.add(new Potree.Annotation({
+            position: [589753, 231437, 792.7726157084892 + 60],
+            title: "web camera",
+        }));
+
+        let videoWebM = new Reality.Video({
+            videoUrl: `${Reality.resourcePath}/videos/big-buck-bunny_trailer.webm`
+        });
+
+        videoWebM.transformationEnabled = false;
+
+        videoWebM.scale.set(87.70990081104037, 65.01472874807978, 95.53770288101325);
+        videoWebM.position.set(589861, 231349, 792.7726157084892);
+        videoWebM.rotation.set(0, 0, 0.0);
+        viewer.scene.addImage(videoWebM);
+
+        viewer.scene.annotations.add(new Potree.Annotation({
+            position: [589861, 231349, 792.7726157084892 + 60],
+            title: "webm",
+        }));
+
+        // transform enabled
+        let videoOgv = new Reality.Video({
+            videoUrl: `${Reality.resourcePath}/videos/sintel.ogv`
+        });
+
+        videoOgv.transformationEnabled = true;
+
+        videoOgv.scale.set(87.70990081104037, 65.01472874807978, 95.53770288101325);
+        videoOgv.position.set(589560, 231397, 792.7726157084892);
+        videoOgv.rotation.set(0, 0, 0);
+        viewer.scene.addImage(videoOgv);
+    }
+
+    function addAnnotations(viewer) {
+        let elTitle = $(`
+						<span>
+							About Annotations
+							<img src="${Potree.resourcePath}/icons/goto.svg"
+								name="action_set_scene"
+								class="annotation-action-icon"
+								style="filter: invert(1);" />
+						</span>
+					`);
+        elTitle.find("img[name=action_set_scene]").click((event) => {
+            event.stopPropagation();
+            viewer.setScene(sceneLion);
+        });
+        elTitle.toString = () => "About Annotations";
+
+        let aAbout1 = new Potree.Annotation({
+            position: [590043.63, 231490.79, 740.78],
+            title: elTitle,
+            cameraPosition: [590105.53, 231541.63, 782.05],
+            cameraTarget: [590043.63, 231488.79, 740.78],
+            description: `<ul><li>Click on the annotation label to move a predefined view.</li>
+						<li>Click on the icon to execute the specified action.</li>
+						In this case, the action will bring you to another scene and point cloud.</ul>`
+        });
+
+        viewer.scene.annotations.add(aAbout1);
+
+        let aAbout2 = new Potree.Annotation({
+            position: [589621, 231437, 784],
+            "cameraPosition": [589585.81, 231463.63, 804.00],
+            "cameraTarget": [589625.86, 231439, 775.38],
+            "title": "About Annotations 2",
+            "description": `
+						Suitable annotation positions and views can be obtained by
+						looking up the current camera position and target in the "Scene" panel,
+						or by evaluating following lines in your browser's developer console:<br><br>
+						<code>viewer.scene.view.position</code><br>
+						<code>viewer.scene.view.getPivot()</code><br>
+						`
+        });
+
+        viewer.scene.annotations.add(aAbout2);
+
+        // Create title element with jquery
+        elTitle = $(`
+						<span>
+							<img name="action_elevation" src="${Potree.resourcePath}/icons/profile.svg" class="annotation-action-icon"/>
+							<img name="action_rgb" src="${Potree.resourcePath}/icons/rgb.svg" class="annotation-action-icon"/>
+						</span>`);
+
+        elTitle.find("img[name=action_elevation]").click(() => {
+            viewer.scene.pointclouds.forEach(pc => pc.material.activeAttributeName = "elevation");
+        });
+
+        elTitle.find("img[name=action_rgb]").click(() => {
+            viewer.scene.pointclouds.forEach(pc => pc.material.activeAttributeName = "rgba");
+        });
+
+        // Give the annotation a meaningful string representation for the sidebar
+        elTitle.toString = () => "Elevation / RGB Actions";
+
+        // Same as with other annotations, except title is a jquery object this time.
+        let aActions = new Potree.Annotation({
+            position: [590012.986, 231273.294, 787.162],
+            title: elTitle
+        });
+
+        viewer.scene.annotations.add(aActions);
+
+        // Create title element with jquery
+        let schemes = [
+            {name: "SPECTRAL", icon: `${Potree.resourcePath}/icons/gradients_spectral.png`},
+            {name: "YELLOW_GREEN", icon: `${Potree.resourcePath}/icons/gradients_yellow_green.png`},
+            {name: "PLASMA", icon: `${Potree.resourcePath}/icons/gradients_plasma.png`},
+            {name: "GRAYSCALE", icon: `${Potree.resourcePath}/icons/gradients_grayscale.png`},
+            {name: "RAINBOW", icon: `${Potree.resourcePath}/icons/gradients_rainbow.png`},
+        ];
+
+        elTitle = $(`<span>Gradient Schemes:</span>`);
+
+        for (let scheme of schemes) {
+            let button = $(`<img src="${scheme.icon}" class="annotation-action-icon" style="width: 2em; height: auto;"/>`);
+            button.click(() => {
+                for (let pointcloud of viewer.scene.pointclouds) {
+                    pointcloud.material.activeAttributeName = "elevation";
+                    pointcloud.material.gradient = Potree.Gradients[scheme.name];
+                }
+            });
+            elTitle.append(button);
+        }
+
+        // Give the annotation a meaningful string representation for the sidebar
+        elTitle.toString = () => "Gradient Color Selection";
+
+        // Same as with other annotations, except title is a jquery object this time.
+        aActions = new Potree.Annotation({
+            position: [589577.396, 231267.514, 807.655],
+            title: elTitle,
+        });
+
+        viewer.scene.annotations.add(aActions);
+
+        let aTrees = new Potree.Annotation({
+            position: [589850.15, 231300.10, 770.94],
+            title: "Trees",
+            description: `Point cloud of a small section in Sorvilier, Switzerland. <br>
+							Courtesy of sigeom.sa`,
+        });
+
+        aTrees.domElement.off("mouseenter");
+        aTrees.domElement.off("mouseleave");
+        aTrees.addEventListener("click", () => {
+            aTrees.setHighlighted(!aTrees.isHighlighted);
+        });
+
+        viewer.scene.annotations.add(aTrees);
+
+        viewer.scene.annotations.add(new Potree.Annotation({
+            position: [590041, 231358, 792.7726157084892 + 60],
+            title: "mov",
+        }));
+
+        viewer.scene.annotations.add(new Potree.Annotation({
+            position: [589753, 231437, 792.7726157084892 + 60],
+            title: "web camera",
+        }));
+
+        viewer.scene.annotations.add(new Potree.Annotation({
+            position: [589861, 231349, 792.7726157084892 + 60],
+            title: "webm",
+        }));
+
+        viewer.scene.annotations.add(new Potree.Annotation({
+            position: [589560, 231397, 792.7726157084892 + 60],
+            title: "Transform enabled ogv",
+        }));
+    }
+
+    function addClipBoxes(viewer) {
+        const scene = viewer.scene;
+
+        { // VOLUME visible
+            let volume = new Potree.BoxVolume();
+            volume.name = "Visible";
+            volume.scale.set(178.04, 159.14, 70.00);
+            volume.position.set(589877.20, 231374.01, 749.62);
+            volume.clip = true;
+            //volume.visible = false;
+
+            scene.addVolume(volume);
+        }
+
+        { // VOLUME invisible
+            let volume = new Potree.BoxVolume();
+            volume.name = "Invisible";
+            volume.scale.set(178.04, 159.14, 70.00);
+            volume.position.set(589661.930, 231374.010, 749.620);
+            volume.clip = true;
+            volume.visible = false;
+
+            scene.addVolume(volume);
+        }
+    }
+
+    function createCameraAnimation() {
+        const animation = new Potree.CameraAnimation(viewer);
+
+        const positions = [
+            [590291.6145250637, 231565.3152460147, 888.181158774433],
+            [590094.2454560432, 231235.32163877538, 870.7535717968211],
+            [589675.8154371583, 231058.22066649256, 905.3068746322883],
+            [589328.6700949036, 231385.37585641106, 813.9565903445384],
+        ];
+
+        const targets = [
+            [589859.3465488373, 231456.18943956672, 758.2733646218901],
+            [589846.4463098792, 231431.89813285187, 755.9090168440739],
+            [589824.0843049305, 231444.72309070674, 760.3459659610106],
+            [589799.7263767472, 231473.79043369304, 758.8332698380435],
+        ];
+
+        for (let i = 0; i < positions.length; i++) {
+            const cp = animation.createControlPoint();
+
+            cp.position.set(...positions[i]);
+            cp.target.set(...targets[i]);
+        }
+
+        viewer.scene.addCameraAnimation(animation);
+    }
+    
+    function addProfile(scene) {
+        let profile = new Potree.Profile();
+        profile.setWidth(6)
+        profile.addMarker(new THREE.Vector3(589641.6098756103, 231453.76974998094, 760.4950016784668));
+        profile.addMarker(new THREE.Vector3(589514.4799995422, 231309.46000003815, 775.6249989318848));
+        profile.addMarker(new THREE.Vector3(589512.4600000381, 231504.9597490845, 764.6350010681152));
+
+        scene.addProfile(profile);
+    }
+</script>
+
+</body>
+</html>

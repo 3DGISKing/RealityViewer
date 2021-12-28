@@ -1,0 +1,1166 @@
+{
+	"meta": {
+		"version": "2.1.5"
+	},
+	"settings": {
+		"pointBudget": 1000000,
+		"fov": 60,
+		"EDLEnabled": true,
+		"EDLRadius": 1.4,
+		"EDLStrength": 0.4,
+		"EDLOpacity": 1,
+		"clipTask": 1,
+		"background": "gradient",
+		"minNodeSize": 30,
+		"showBoundingBoxes": false
+	},
+	"view": {
+		"position": {
+			"x": 589974.341,
+			"y": 231698.397,
+			"z": 986.146
+		},
+		"yaw": -3.5680455689260455,
+		"pitch": -0.7391564976392261,
+		"radius": 401.5528365184263
+	},
+	"classification": {
+		"0": {
+			"visible": true,
+			"name": "never classified",
+			"color": [
+				0.5,
+				0.5,
+				0.5,
+				1
+			]
+		},
+		"1": {
+			"visible": true,
+			"name": "unclassified",
+			"color": [
+				0.5,
+				0.5,
+				0.5,
+				1
+			]
+		},
+		"2": {
+			"visible": true,
+			"name": "ground",
+			"color": [
+				0.63,
+				0.32,
+				0.18,
+				1
+			]
+		},
+		"3": {
+			"visible": true,
+			"name": "low vegetation",
+			"color": [
+				0,
+				1,
+				0,
+				1
+			]
+		},
+		"4": {
+			"visible": true,
+			"name": "medium vegetation",
+			"color": [
+				0,
+				0.8,
+				0,
+				1
+			]
+		},
+		"5": {
+			"visible": true,
+			"name": "high vegetation",
+			"color": [
+				0,
+				0.6,
+				0,
+				1
+			]
+		},
+		"6": {
+			"visible": true,
+			"name": "building",
+			"color": [
+				1,
+				0.66,
+				0,
+				1
+			]
+		},
+		"7": {
+			"visible": true,
+			"name": "low point(noise)",
+			"color": [
+				1,
+				0,
+				1,
+				1
+			]
+		},
+		"8": {
+			"visible": true,
+			"name": "key-point",
+			"color": [
+				1,
+				0,
+				0,
+				1
+			]
+		},
+		"9": {
+			"visible": true,
+			"name": "water",
+			"color": [
+				0,
+				0,
+				1,
+				1
+			]
+		},
+		"12": {
+			"visible": true,
+			"name": "overlap",
+			"color": [
+				1,
+				1,
+				0,
+				1
+			]
+		},
+		"DEFAULT": {
+			"visible": true,
+			"name": "default",
+			"color": [
+				0.3,
+				0.6,
+				0.6,
+				0.5
+			]
+		}
+	},
+	"pointClouds": [
+		{
+			"name": "sorvilier",
+			"url": "../potree/pointclouds/vol_total/cloud.js",
+			"position": {
+				"x": 589500,
+				"y": 231300,
+				"z": 722.505
+			},
+			"scale": {
+				"x": 1,
+				"y": 1,
+				"z": 1
+			},
+			"rotation": {
+				"x": 0,
+				"y": 0,
+				"z": 0
+			},
+			"material": {
+				"size": 1,
+				"minSize": 2,
+				"pointSizeType": 2,
+				"shape": 0,
+				"activeAttributeName": "rgba",
+				"gradient": [
+					[
+						0,
+						6114978
+					],
+					[
+						0.1,
+						3311549
+					],
+					[
+						0.2,
+						6734501
+					],
+					[
+						0.3,
+						11263395
+					],
+					[
+						0.4,
+						15136152
+					],
+					[
+						0.5,
+						16777150
+					],
+					[
+						0.6,
+						16703371
+					],
+					[
+						0.7,
+						16625249
+					],
+					[
+						0.8,
+						16018754
+					],
+					[
+						0.9,
+						13974862
+					],
+					[
+						1,
+						10289217
+					]
+				],
+				"elevationRange": [
+					722.564,
+					789.921
+				],
+				"weightRGB": 1,
+				"weightElevation": 0,
+				"matcap": "matcap.jpg",
+				"heightMin": 722.564,
+				"heightMax": 789.921,
+				"rgbGamma": 1
+			}
+		},
+		{
+			"name": "lion 1",
+			"url": "../potree/pointclouds/lion_takanawa/cloud.js",
+			"position": {
+				"x": 589927.44,
+				"y": 231479.04,
+				"z": 726.87
+			},
+			"scale": {
+				"x": 10,
+				"y": 10,
+				"z": 10
+			},
+			"rotation": {
+				"x": 0,
+				"y": 0,
+				"z": 2.5132741228718345
+			},
+			"material": {
+				"size": 1,
+				"minSize": 2,
+				"pointSizeType": 2,
+				"shape": 0,
+				"activeAttributeName": "rgba",
+				"gradient": [
+					[
+						0,
+						6114978
+					],
+					[
+						0.1,
+						3311549
+					],
+					[
+						0.2,
+						6734501
+					],
+					[
+						0.3,
+						11263395
+					],
+					[
+						0.4,
+						15136152
+					],
+					[
+						0.5,
+						16777150
+					],
+					[
+						0.6,
+						16703371
+					],
+					[
+						0.7,
+						16625249
+					],
+					[
+						0.8,
+						16018754
+					],
+					[
+						0.9,
+						13974862
+					],
+					[
+						1,
+						10289217
+					]
+				],
+				"elevationRange": [
+					2.55100011825562,
+					7.1957106590271
+				],
+				"weightRGB": 1,
+				"weightElevation": 0,
+				"matcap": "matcap.jpg",
+				"heightMin": 2.55100011825562,
+				"heightMax": 7.1957106590271,
+				"rgbGamma": 1
+			}
+		},
+		{
+			"name": "lion 2",
+			"url": "../potree/pointclouds/lion_takanawa/cloud.js",
+			"position": {
+				"x": 589997.44,
+				"y": 231479.04,
+				"z": 726.87
+			},
+			"scale": {
+				"x": 10,
+				"y": 10,
+				"z": 10
+			},
+			"rotation": {
+				"x": 0,
+				"y": 0,
+				"z": 2.5132741228718345
+			},
+			"material": {
+				"size": 1,
+				"minSize": 2,
+				"pointSizeType": 2,
+				"shape": 0,
+				"activeAttributeName": "elevation",
+				"gradient": [
+					[
+						0,
+						6114978
+					],
+					[
+						0.1,
+						3311549
+					],
+					[
+						0.2,
+						6734501
+					],
+					[
+						0.3,
+						11263395
+					],
+					[
+						0.4,
+						15136152
+					],
+					[
+						0.5,
+						16777150
+					],
+					[
+						0.6,
+						16703371
+					],
+					[
+						0.7,
+						16625249
+					],
+					[
+						0.8,
+						16018754
+					],
+					[
+						0.9,
+						13974862
+					],
+					[
+						1,
+						10289217
+					]
+				],
+				"elevationRange": [
+					720,
+					780
+				],
+				"weightRGB": 1,
+				"weightElevation": 0,
+				"matcap": "matcap.jpg",
+				"heightMin": 720,
+				"heightMax": 780,
+				"rgbGamma": 1
+			}
+		},
+		{
+			"name": "lion 3",
+			"url": "../potree/pointclouds/lion_takanawa/cloud.js",
+			"position": {
+				"x": 589857.44,
+				"y": 231479.04,
+				"z": 726.87
+			},
+			"scale": {
+				"x": 10,
+				"y": 10,
+				"z": 10
+			},
+			"rotation": {
+				"x": 0,
+				"y": 0,
+				"z": 2.5132741228718345
+			},
+			"material": {
+				"size": 1,
+				"minSize": 2,
+				"pointSizeType": 2,
+				"shape": 0,
+				"activeAttributeName": "rgba",
+				"gradient": [
+					[
+						0,
+						6114978
+					],
+					[
+						0.1,
+						3311549
+					],
+					[
+						0.2,
+						6734501
+					],
+					[
+						0.3,
+						11263395
+					],
+					[
+						0.4,
+						15136152
+					],
+					[
+						0.5,
+						16777150
+					],
+					[
+						0.6,
+						16703371
+					],
+					[
+						0.7,
+						16625249
+					],
+					[
+						0.8,
+						16018754
+					],
+					[
+						0.9,
+						13974862
+					],
+					[
+						1,
+						10289217
+					]
+				],
+				"elevationRange": [
+					2.55100011825562,
+					7.1957106590271
+				],
+				"weightRGB": 1,
+				"weightElevation": 0,
+				"matcap": "matcap.jpg",
+				"heightMin": 2.55100011825562,
+				"heightMax": 7.1957106590271,
+				"rgbGamma": 1
+			}
+		},
+		{
+			"name": "Heidentor",
+			"url": "http://5.9.65.151/mschuetz/potree/resources/pointclouds/archpro/heidentor/cloud.js",
+			"position": {
+				"x": 589817.92,
+				"y": 231358.01,
+				"z": 744.865
+			},
+			"scale": {
+				"x": 6,
+				"y": 6,
+				"z": 6
+			},
+			"rotation": {
+				"x": 0,
+				"y": 0,
+				"z": -1.9
+			},
+			"material": {
+				"size": 1,
+				"minSize": 2,
+				"pointSizeType": 0,
+				"shape": 0,
+				"activeAttributeName": "rgba",
+				"gradient": [
+					[
+						0,
+						6114978
+					],
+					[
+						0.1,
+						3311549
+					],
+					[
+						0.2,
+						6734501
+					],
+					[
+						0.3,
+						11263395
+					],
+					[
+						0.4,
+						15136152
+					],
+					[
+						0.5,
+						16777150
+					],
+					[
+						0.6,
+						16703371
+					],
+					[
+						0.7,
+						16625249
+					],
+					[
+						0.8,
+						16018754
+					],
+					[
+						0.9,
+						13974862
+					],
+					[
+						1,
+						10289217
+					]
+				],
+				"elevationRange": [
+					1.687,
+					15.803
+				],
+				"weightRGB": 1,
+				"weightElevation": 0,
+				"matcap": "matcap.jpg",
+				"heightMin": 1.687,
+				"heightMax": 15.803,
+				"rgbGamma": 1
+			}
+		}
+	],
+	"annotations": [
+		{
+			"position": [
+				590043.63,
+				231490.79,
+				740.78
+			],
+			"description": "<ul><li>Click on the annotation label to move a predefined view.</li>\n\t\t\t\t\t\t<li>Click on the icon to execute the specified action.</li>\n\t\t\t\t\t\tIn this case, the action will bring you to another scene and point cloud.</ul>",
+			"titleOuterHtml": "<span>\n\t\t\t\t\t\t\tAbout Annotations\n\t\t\t\t\t\t\t<img src=\"http://localhost:3000/potree/build/potree/resources/icons/goto.svg\" name=\"action_set_scene\" class=\"annotation-action-icon\" style=\"filter: invert(1);\">\n\t\t\t\t\t\t</span>",
+			"titleString": "About Annotations",
+			"cameraPosition": [
+				590105.53,
+				231541.63,
+				782.05
+			],
+			"cameraTarget": [
+				590043.63,
+				231488.79,
+				740.78
+			]
+		},
+		{
+			"position": [
+				589621,
+				231437,
+				784
+			],
+			"description": "\n\t\t\t\t\t\tSuitable annotation positions and views can be obtained by\n\t\t\t\t\t\tlooking up the current camera position and target in the \"Scene\" panel,\n\t\t\t\t\t\tor by evaluating following lines in your browser's developer console:<br><br>\n\t\t\t\t\t\t<code>viewer.scene.view.position</code><br>\n\t\t\t\t\t\t<code>viewer.scene.view.getPivot()</code><br>\n\t\t\t\t\t\t",
+			"titleString": "About Annotations 2",
+			"cameraPosition": [
+				589585.81,
+				231463.63,
+				804
+			],
+			"cameraTarget": [
+				589625.86,
+				231439,
+				775.38
+			]
+		},
+		{
+			"position": [
+				590012.986,
+				231273.294,
+				787.162
+			],
+			"description": "",
+			"titleOuterHtml": "<span>\n\t\t\t\t\t\t\t<img name=\"action_elevation\" src=\"http://localhost:3000/potree/build/potree/resources/icons/profile.svg\" class=\"annotation-action-icon\">\n\t\t\t\t\t\t\t<img name=\"action_rgb\" src=\"http://localhost:3000/potree/build/potree/resources/icons/rgb.svg\" class=\"annotation-action-icon\">\n\t\t\t\t\t\t</span>",
+			"titleString": "Elevation / RGB Actions"
+		},
+		{
+			"position": [
+				589577.396,
+				231267.514,
+				807.655
+			],
+			"description": "",
+			"titleOuterHtml": "<span>Gradient Schemes:<img src=\"http://localhost:3000/potree/build/potree/resources/icons/gradients_spectral.png\" class=\"annotation-action-icon\" style=\"width: 2em; height: auto;\"><img src=\"http://localhost:3000/potree/build/potree/resources/icons/gradients_yellow_green.png\" class=\"annotation-action-icon\" style=\"width: 2em; height: auto;\"><img src=\"http://localhost:3000/potree/build/potree/resources/icons/gradients_plasma.png\" class=\"annotation-action-icon\" style=\"width: 2em; height: auto;\"><img src=\"http://localhost:3000/potree/build/potree/resources/icons/gradients_grayscale.png\" class=\"annotation-action-icon\" style=\"width: 2em; height: auto;\"><img src=\"http://localhost:3000/potree/build/potree/resources/icons/gradients_rainbow.png\" class=\"annotation-action-icon\" style=\"width: 2em; height: auto;\"></span>",
+			"titleString": "Gradient Color Selection"
+		},
+		{
+			"position": [
+				589850.15,
+				231300.1,
+				770.94
+			],
+			"description": "Point cloud of a small section in Sorvilier, Switzerland. <br>\n\t\t\t\t\t\t\tCourtesy of sigeom.sa",
+			"titleString": "Trees"
+		},
+		{
+			"position": [
+				590041,
+				231358,
+				852.7726157084892
+			],
+			"description": "",
+			"titleString": "mov"
+		},
+		{
+			"position": [
+				589753,
+				231437,
+				852.7726157084892
+			],
+			"description": "",
+			"titleString": "web camera"
+		},
+		{
+			"position": [
+				589861,
+				231349,
+				852.7726157084892
+			],
+			"description": "",
+			"titleString": "webm"
+		},
+		{
+			"position": [
+				589560,
+				231397,
+				852.7726157084892
+			],
+			"description": "",
+			"titleString": "Transform enabled ogv"
+		},
+		{
+			"position": [
+				589688.5173246722,
+				231341.79786558595,
+				852.7726157084892
+			],
+			"description": "",
+			"titleString": "mp4"
+		},
+		{
+			"position": [
+				590041,
+				231358,
+				852.7726157084892
+			],
+			"description": "",
+			"titleString": "mov"
+		},
+		{
+			"position": [
+				589753,
+				231437,
+				852.7726157084892
+			],
+			"description": "",
+			"titleString": "web camera"
+		},
+		{
+			"position": [
+				589861,
+				231349,
+				852.7726157084892
+			],
+			"description": "",
+			"titleString": "webm"
+		}
+	],
+	"measurements": [
+		{
+			"uuid": "799A8415-229B-4F7A-8365-5A8D661833C4",
+			"name": "Point",
+			"showDistances": false,
+			"showCoordinates": true,
+			"showAngles": false,
+			"showHeight": false,
+			"showArea": false,
+			"closed": true,
+			"coordinates": [
+				[
+					589853.73,
+					231300.24,
+					775.48
+				]
+			],
+			"showCircle": false,
+			"showAzimuth": false,
+			"showEdges": true,
+			"color": [
+				1,
+				0,
+				0
+			]
+		},
+		{
+			"uuid": "E2558583-2CFA-4386-83C3-21A7B4FB18FB",
+			"name": "Line",
+			"showDistances": true,
+			"showCoordinates": false,
+			"showAngles": false,
+			"showHeight": false,
+			"showArea": false,
+			"closed": false,
+			"coordinates": [
+				[
+					589803.18,
+					231357.35,
+					745.38
+				],
+				[
+					589795.74,
+					231323.42,
+					746.21
+				],
+				[
+					589822.5,
+					231315.9,
+					744.45
+				]
+			],
+			"showCircle": false,
+			"showAzimuth": false,
+			"showEdges": true,
+			"color": [
+				1,
+				0,
+				0
+			]
+		},
+		{
+			"uuid": "7A089057-76F7-4974-A338-2B12962767E9",
+			"name": "Angle",
+			"showDistances": false,
+			"showCoordinates": false,
+			"showAngles": true,
+			"showHeight": false,
+			"showArea": false,
+			"closed": true,
+			"coordinates": [
+				[
+					589866.11,
+					231372.25,
+					737.41
+				],
+				[
+					589842.15,
+					231366.82,
+					743.61
+				],
+				[
+					589860.61,
+					231348.01,
+					740.33
+				]
+			],
+			"showCircle": false,
+			"showAzimuth": false,
+			"showEdges": true,
+			"color": [
+				1,
+				0,
+				0
+			]
+		},
+		{
+			"uuid": "1498D414-0981-4A76-A4CD-2AD0935F916F",
+			"name": "Tree Height",
+			"showDistances": false,
+			"showCoordinates": false,
+			"showAngles": false,
+			"showHeight": true,
+			"showArea": false,
+			"closed": false,
+			"coordinates": [
+				[
+					589849.69,
+					231327.26,
+					766.32
+				],
+				[
+					589840.96,
+					231329.53,
+					744.52
+				]
+			],
+			"showCircle": false,
+			"showAzimuth": false,
+			"showEdges": true,
+			"color": [
+				1,
+				0,
+				0
+			]
+		},
+		{
+			"uuid": "1C0D560C-9BA8-4311-A5F5-458EEF233A67",
+			"name": "Area",
+			"showDistances": true,
+			"showCoordinates": false,
+			"showAngles": false,
+			"showHeight": false,
+			"showArea": true,
+			"closed": true,
+			"coordinates": [
+				[
+					589899.37,
+					231300.16,
+					750.25
+				],
+				[
+					589874.6,
+					231326.06,
+					743.4
+				],
+				[
+					589911.61,
+					231352.57,
+					743.58
+				],
+				[
+					589943.5,
+					231300.08,
+					754.62
+				]
+			],
+			"showCircle": false,
+			"showAzimuth": false,
+			"showEdges": true,
+			"color": [
+				1,
+				0,
+				0
+			]
+		}
+	],
+	"images": [
+		{
+			"url": "http://localhost:3000/build/resources/images/earth.jpg",
+			"transformationEnabled": false,
+			"position": [
+				590080,
+				231546,
+				792.7726157084892
+			],
+			"scale": [
+				87.70990081104037,
+				65.01472874807978,
+				95.53770288101325
+			],
+			"rotation": [
+				0,
+				0,
+				0,
+				"XYZ"
+			]
+		},
+		{
+			"url": "http://localhost:3000/build/resources/images/earth.jpg",
+			"transformationEnabled": true,
+			"position": [
+				589696.48,
+				231457.89,
+				795
+			],
+			"scale": [
+				87.70990081104037,
+				65.01472874807978,
+				95.53770288101325
+			],
+			"rotation": [
+				0,
+				0,
+				0,
+				"XYZ"
+			]
+		}
+	],
+	"videos": [
+		{
+			"url": "http://localhost:3000/build/resources/videos/big-buck-bunny_trailer.mp4",
+			"isWebCamera": false,
+			"minDistance": 1,
+			"maxDistance": 500,
+			"rollOffMode": "easeInExpo",
+			"transformationEnabled": false,
+			"position": [
+				589688.5173246722,
+				231341.79786558595,
+				792.7726157084892
+			],
+			"scale": [
+				87.70990081104037,
+				65.01472874807978,
+				95.53770288101325
+			],
+			"rotation": [
+				0,
+				0,
+				0,
+				"XYZ"
+			]
+		},
+		{
+			"url": "http://localhost:3000/build/resources/videos/big-buck-bunny_trailer.mov",
+			"isWebCamera": false,
+			"minDistance": 1,
+			"maxDistance": 500,
+			"rollOffMode": "linear",
+			"transformationEnabled": false,
+			"position": [
+				590041,
+				231358,
+				792.7726157084892
+			],
+			"scale": [
+				87.70990081104037,
+				65.01472874807978,
+				95.53770288101325
+			],
+			"rotation": [
+				0,
+				0,
+				0,
+				"XYZ"
+			]
+		},
+		{
+			"isWebCamera": true,
+			"minDistance": 1,
+			"maxDistance": 1000,
+			"rollOffMode": "easeInExpo",
+			"transformationEnabled": false,
+			"position": [
+				589753,
+				231437,
+				792.7726157084892
+			],
+			"scale": [
+				87.70990081104037,
+				65.01472874807978,
+				95.53770288101325
+			],
+			"rotation": [
+				0,
+				0,
+				0,
+				"XYZ"
+			]
+		},
+		{
+			"url": "http://localhost:3000/build/resources/videos/big-buck-bunny_trailer.webm",
+			"isWebCamera": false,
+			"minDistance": 1,
+			"maxDistance": 1000,
+			"rollOffMode": "linear",
+			"transformationEnabled": false,
+			"position": [
+				589861,
+				231349,
+				792.7726157084892
+			],
+			"scale": [
+				87.70990081104037,
+				65.01472874807978,
+				95.53770288101325
+			],
+			"rotation": [
+				0,
+				0,
+				0,
+				"XYZ"
+			]
+		},
+		{
+			"url": "http://localhost:3000/build/resources/videos/sintel.ogv",
+			"isWebCamera": false,
+			"minDistance": 1,
+			"maxDistance": 1000,
+			"rollOffMode": "linear",
+			"transformationEnabled": true,
+			"position": [
+				589560,
+				231397,
+				792.7726157084892
+			],
+			"scale": [
+				87.70990081104037,
+				65.01472874807978,
+				95.53770288101325
+			],
+			"rotation": [
+				0,
+				0,
+				0,
+				"XYZ"
+			]
+		}
+	],
+	"volumes": [
+		{
+			"uuid": "125F5EC6-19E4-4B77-B314-DEABE21CDBAD",
+			"type": "BoxVolume",
+			"name": "Visible",
+			"position": [
+				589877.2,
+				231374.01,
+				749.62
+			],
+			"rotation": [
+				0,
+				0,
+				0,
+				"XYZ"
+			],
+			"scale": [
+				178.04,
+				159.14,
+				70
+			],
+			"clip": true,
+			"visible": true
+		},
+		{
+			"uuid": "CC12AEC3-52A0-4E76-87A3-D5367211B8F9",
+			"type": "BoxVolume",
+			"name": "Invisible",
+			"position": [
+				589661.93,
+				231374.01,
+				749.62
+			],
+			"rotation": [
+				0,
+				0,
+				0,
+				"XYZ"
+			],
+			"scale": [
+				178.04,
+				159.14,
+				70
+			],
+			"clip": true,
+			"visible": false
+		}
+	],
+	"cameraAnimations": [
+		{
+			"uuid": "236ABD35-9ABC-4487-889C-00D62285DFC0",
+			"name": "Camera Animation",
+			"duration": 5,
+			"t": 0,
+			"curveType": "centripetal",
+			"visible": true,
+			"controlPoints": [
+				{
+					"position": [
+						590291.6145250637,
+						231565.3152460147,
+						888.181158774433
+					],
+					"target": [
+						589859.3465488373,
+						231456.18943956672,
+						758.2733646218901
+					]
+				},
+				{
+					"position": [
+						590094.2454560432,
+						231235.32163877538,
+						870.7535717968211
+					],
+					"target": [
+						589846.4463098792,
+						231431.89813285187,
+						755.9090168440739
+					]
+				},
+				{
+					"position": [
+						589675.8154371583,
+						231058.22066649256,
+						905.3068746322883
+					],
+					"target": [
+						589824.0843049305,
+						231444.72309070674,
+						760.3459659610106
+					]
+				},
+				{
+					"position": [
+						589328.6700949036,
+						231385.37585641106,
+						813.9565903445384
+					],
+					"target": [
+						589799.7263767472,
+						231473.79043369304,
+						758.8332698380435
+					]
+				}
+			]
+		}
+	],
+	"profiles": [
+		{
+			"uuid": "3CD65C05-EA8B-485D-A383-91C99D6D9E5B",
+			"name": "Profile_0",
+			"points": [
+				[
+					589641.6098756103,
+					231453.76974998094,
+					760.4950016784668
+				],
+				[
+					589514.4799995422,
+					231309.46000003815,
+					775.6249989318848
+				],
+				[
+					589512.4600000381,
+					231504.9597490845,
+					764.6350010681152
+				]
+			],
+			"height": 20,
+			"width": 6
+		}
+	]
+}

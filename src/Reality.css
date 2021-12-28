@@ -1,0 +1,11 @@
+#export_dialog {
+    display: none;
+    position: absolute;
+    right: 100px;
+    bottom: 100px;
+    width: 250px;
+    height: 150px;
+    border-radius: 5px;
+    background: rgba(48,51,54,.8);
+    border: 1px solid #444;
+}
