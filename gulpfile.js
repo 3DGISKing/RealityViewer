@@ -13,8 +13,8 @@ gulp.task('potree:clean', function (done) {
     done();
 });
 
-gulp.task('potree:copy', function (done) {
-        fse.copySync(`node_modules/potree`, "./potree", {recursive: true});
+gulp.task('potree:clone', function (done) {
+        execSync('git clone --branch 1.8 https://github.com/potree/potree');
         done();
     }
 );
@@ -24,7 +24,7 @@ gulp.task('potree:modify', function (done) {
 
         fs.appendFileSync('./potree/src/Potree.js', potreeExtra);
 
-        done()
+        done();
     }
 );
 
@@ -39,12 +39,12 @@ gulp.task('potree:build', function (done) {
 
         buildProcess.on('exit', (code) => {
             done();
-        })
+        });
     }
 );
 
 gulp.task('potree',
-    gulp.series('potree:clean', 'potree:copy', 'potree:modify', 'potree:build')
+    gulp.series('potree:clean', 'potree:clone', 'potree:modify', 'potree:build')
 );
 
 gulp.task("customTask", function (done) {

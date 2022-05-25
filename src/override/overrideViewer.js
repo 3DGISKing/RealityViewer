@@ -1,6 +1,6 @@
 import * as THREE from "three"
 import {BoxVolume, CameraMode, MapView, ProfileWindow, ProfileWindowController, Sidebar, Viewer} from "Potree";
-import {VRButton} from "../../../potree/libs/three.js/extra/VRButton.js"
+import {VRButton} from "../../potree/libs/three.js/extra/VRButton.js"
 
 function overrideViewer() {
     // override Viewer

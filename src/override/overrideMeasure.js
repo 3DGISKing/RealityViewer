@@ -1,8 +1,8 @@
 import * as THREE from "three"
 import {Measure, TextSprite, Utils} from "Potree"
-import {Line2} from "../../../potree/libs/three.js/lines/Line2.js"
-import {LineGeometry} from "../../../potree/libs/three.js/lines/LineGeometry.js"
-import {LineMaterial} from "../../../potree/libs/three.js/lines/LineMaterial.js"
+import {Line2} from "../../potree/libs/three.js/lines/Line2.js"
+import {LineGeometry} from "../../potree/libs/three.js/lines/LineGeometry.js"
+import {LineMaterial} from "../../potree/libs/three.js/lines/LineMaterial.js"
 
 function overrideMeasure() {
     Measure.prototype.update = function () {
