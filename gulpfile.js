@@ -9,7 +9,7 @@ const exec = require('child_process').exec;
 const fs = require('fs');
 
 gulp.task('potree:clean', function (done) {
-    del.sync(`./potree/**`, {force: true});
+    del.sync(`./potree`, {force: true});
     done();
 });
 
